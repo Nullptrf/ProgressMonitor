@@ -12,6 +12,9 @@ The `ProgressMonitor` class provides a flexible way to monitor the progress of m
 - Set sleep time between progress updates.
 - Display a summary of function execution.
 
+## Preview
+![I](https://github.com/i-Taylo/ProgressMonitor/blob/main/terminal_output.gif)
+
 ## Usage
 1. **Include the header file:**
    ```cpp
