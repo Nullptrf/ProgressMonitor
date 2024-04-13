@@ -1,5 +1,6 @@
-#ifndef PROGRESS_MONITOR_H
-#define PROGRESS_MONITOR_H
+// AUTHOR OF THIS HEADER: Taylo <github> : https://github.com/i-Taylo
+#ifndef PROGRESSMONITOR_H
+#define PROGRESSMONITOR_H
 
 #include <cstdlib>
 #include <iostream>
@@ -13,10 +14,10 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-#include <termio.h> // for termios, TCSANOW, tcgetattr, tcsetattr
-#include <unistd.h> // for STDOUT_FILENO
-#include <sys/ioctl.h> // for ioctl
-#include <cmath> // for std::floor
+#include <termio.h>
+#include <unistd.h> 
+#include <sys/ioctl.h> 
+#include <cmath> 
 #include <array>
 
 class ProgressMonitor {
@@ -108,6 +109,7 @@ public:
     static auto setBarLeadSymbol(const std::string& symbol) -> std::string {
         return barLeadSymbol = symbol;
     }
+    // Coloring function 
     static auto setColorTo(ColorTarget target, Colors color) -> std::string {
         std::string colorCode;
         if (isTerminal()) {
@@ -177,17 +179,12 @@ public:
             barEndSymbol_color = colorCode;
             break;
         }
-
-
         hasColor = true;
         return colorCode;
     }
     static auto captureFunctionsOutput(bool _CaptureOutput) -> bool {
         return CaptureOutput = _CaptureOutput;
     }
-
-
-
     // abort function
     static int abort(AbortT abortType = RETURN, const char* reason = "", ...) {
         std::va_list args;
@@ -204,6 +201,8 @@ public:
 
         return EXIT_FAILURE;
     }
+
+    // Function to get the totol duration of the executed functions
     static auto getTotalDuration() -> int {
         int totalDuration = 0;
         for (const auto& func : functions) {
@@ -211,6 +210,8 @@ public:
         }
         return totalDuration;
     }
+
+    // Function to execute external commands
     static std::string exec(const char* cmd, ...) {
         std::array<char, 128> buffer;
         std::string result;
@@ -227,7 +228,7 @@ public:
 private:
     static std::vector<Function> functions;
     static std::vector<FunctionName> functionNames;
-    static int sleepTime; // Static member variable to hold the sleep time
+    static int sleepTime;
     static std::string finishText;
     static int _BarWidth;
     static std::string barStartSymbol;
@@ -307,7 +308,7 @@ private:
     }
 
 };
-//namespace  {
+
 std::vector<ProgressMonitor::Function> ProgressMonitor::functions;
 std::vector<ProgressMonitor::FunctionName> ProgressMonitor::functionNames;
 int ProgressMonitor::sleepTime = 0; // Default sleep time is 1 second
@@ -330,4 +331,5 @@ std::string ProgressMonitor::barEndSymbol_color;
 std::string ProgressMonitor::barFillSymbol_color;
 std::string ProgressMonitor::barLeadSymbol_color;
 std::string ProgressMonitor::funname_color;
-#endif // PROGRESS_MONITOR_H
+
+#endif // PROGRESSMONITOR_H
