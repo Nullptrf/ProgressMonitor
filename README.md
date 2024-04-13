@@ -16,6 +16,7 @@ The `ProgressMonitor` class provides a flexible way to monitor the progress of m
 ![I](https://github.com/i-Taylo/ProgressMonitor/blob/main/terminal_output.gif)
 
 ## Usage
+
 1. **Include the header file:**
    ```cpp
    #include "ProgressMonitor.h"
@@ -82,6 +83,9 @@ The `ProgressMonitor` class provides a flexible way to monitor the progress of m
     ProgressMonitor::abort(ProgressMonitor::AbortT::EXIT, "Reason for aborting.");
     // or
     ProgressMonitor::abort(ProgressMonitor::AbortT::RETURN, "Reason for aborting.");
+    
+    // You can disable the summary after all functions finished! by default the summary will show.
+    ProgressMonitor::showFinishSummary(false);
     ```
 
 

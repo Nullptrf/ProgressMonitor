@@ -225,6 +225,11 @@ public:
         return result;
     }
 
+    // Function to disable or enable finish text
+    static auto showFinishSummary(const bool choice) -> bool {
+        return isShowFinishSummary = choice;
+    }
+
 private:
     static std::vector<Function> functions;
     static std::vector<FunctionName> functionNames;
@@ -241,6 +246,7 @@ private:
     static bool isFill;
     static bool isStart;
     static bool isEnd;
+    static bool isShowFinishSummary;
     static std::string barStartSymbol_color;
     static std::string barEndSymbol_color;
     static std::string barFillSymbol_color;
@@ -300,11 +306,13 @@ private:
     }
 
     static void displaySummary(int numFunctions, int duration) {
-        if (finishText.empty()) {
-            std::cout << "\nFinished " << numFunctions << " functions in " << duration << " seconds." << std::endl;
-        } else {
-            std::cout << finishText << std::endl;
-        }
+        if (isShowFinishSummary) {
+            if (finishText.empty()) {
+                std::cout << "\nFinished " << numFunctions << " functions in " << duration << " seconds." << std::endl;
+            } else {
+                std::cout << finishText << std::endl;
+            }        
+        } 
     }
 
 };
@@ -326,6 +334,7 @@ bool ProgressMonitor::isStart = false;
 bool ProgressMonitor::isEnd = false;
 bool ProgressMonitor::isFunname = false;
 bool ProgressMonitor::CaptureOutput = true;
+bool ProgressMonitor::isShowFinishSummary = true;
 std::string ProgressMonitor::barStartSymbol_color;
 std::string ProgressMonitor::barEndSymbol_color;
 std::string ProgressMonitor::barFillSymbol_color;

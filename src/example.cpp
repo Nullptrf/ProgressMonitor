@@ -52,7 +52,7 @@ ProgressMonitor::Function function2 = []() -> std::string {
 
     std::ostringstream oss;
     oss << ProgressMonitor::exec(command.c_str()) << std::endl << std::flush;
-    ProgressMonitor::setSleep(1000);
+    ProgressMonitor::setSleep(200);
     return oss.str();
 };
 
@@ -88,12 +88,15 @@ auto main() -> int {
 
     // Enable capturing and displaying the output of monitored functions.
     ProgressMonitor::captureFunctionsOutput(true);
+    
+    // You can disable the summary after all functions finished! by default the summary will show.
+    ProgressMonitor::showFinishSummary(false);
 
 
-    ProgressMonitor::setBarStartSymbol("("); // remove this line to keep the default `[`
-    ProgressMonitor::setBarEndSymbol(")"); // remove this line to keep the default `]`
-    ProgressMonitor::setBarFillSymbol("="); // remove this line to keep the default `▇`
-    ProgressMonitor::setBarLeadSymbol("->"); // remove this line to keep the default `-▶`
+    // ProgressMonitor::setBarStartSymbol("("); // remove this line to keep the default `[`
+    // ProgressMonitor::setBarEndSymbol(")"); // remove this line to keep the default `]`
+    // ProgressMonitor::setBarFillSymbol("="); // remove this line to keep the default `▇`
+    // ProgressMonitor::setBarLeadSymbol("->"); // remove this line to keep the default `-▶`
 
     // call startMonitoring to start monitoring the selected functions above.
     ProgressMonitor::startMonitoring();
